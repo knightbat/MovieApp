@@ -33,10 +33,10 @@
     [tlr getAllMovies];
     
     [self setupSearch];
-
-
-   
-
+    
+    
+    
+    
     asyncImage = [[AsyncImageView alloc]init];
     
     
@@ -62,7 +62,7 @@
                               }
                           }];
     
-
+    
     
     
 }
@@ -85,9 +85,9 @@
     [tableview2 reloadData];
     [tlr getAllMovies];
     
-//    self.navigationItem.titleView = nil;
-//    self.navigationItem.rightBarButtonItem = searchButton;
-
+    //    self.navigationItem.titleView = nil;
+    //    self.navigationItem.rightBarButtonItem = searchButton;
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;
@@ -122,12 +122,12 @@
         if (2*indexPath.row+1 < movieCount) {
             
             NSString *url = [NSString stringWithFormat:@"%@%@",[SingletonCenter sharedSingleton].baseUrl, [[movieList objectAtIndex:2*indexPath.row+1] valueForKey:@"thumb"]];
-
+            
             cell.movieImage.imageURL = [NSURL URLWithString:url];
             cell.movieName.text = [[movieList objectAtIndex:2*indexPath.row+1] valueForKey:@"name"];
             cell.cmtCount.text = @"300";
             cell.favCount.text = @"70";
-
+            
         }
         return cell;
     }else{
@@ -152,14 +152,14 @@
             
             [self fixHeight];
         }
-            asyncImage.image = [UIImage imageNamed:@"default-placeholder.png"];
-            NSString *url = [NSString stringWithFormat:@"%@%@",[SingletonCenter sharedSingleton].baseUrl, [[movieList objectAtIndex:2*indexPath.row+1] valueForKey:@"thumb"]];
-            asyncImage.imageURL=[NSURL URLWithString: url];
-            
-            float width = self.view.frame.size.width/2 - 4;
-            float height = width*asyncImage.image.size.height/asyncImage.image.size.width;
-            return height+64;
-
+        asyncImage.image = [UIImage imageNamed:@"default-placeholder.png"];
+        NSString *url = [NSString stringWithFormat:@"%@%@",[SingletonCenter sharedSingleton].baseUrl, [[movieList objectAtIndex:2*indexPath.row+1] valueForKey:@"thumb"]];
+        asyncImage.imageURL=[NSURL URLWithString: url];
+        
+        float width = self.view.frame.size.width/2 - 4;
+        float height = width*asyncImage.image.size.height/asyncImage.image.size.width;
+        return height+64;
+        
         
     }else{
         
@@ -188,7 +188,7 @@
     }else{
         
         tableview2.contentSize = CGSizeMake(tableview2.contentSize.width, tableview1.contentSize.height);
-
+        
     }
     
     
@@ -197,24 +197,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-
+    
+    
     if (tableView.tag) {
         
-       toNext = [movieList objectAtIndex:2*indexPath.row+1];
-            
+        toNext = [movieList objectAtIndex:2*indexPath.row+1];
+        
     }else{
         
-       toNext = [movieList objectAtIndex:2*indexPath.row];
+        toNext = [movieList objectAtIndex:2*indexPath.row];
         
     }
-
+    
     FullViewController *fullView = [self.storyboard instantiateViewControllerWithIdentifier:@"fullView"];
-
+    
     fullView.movieId = [toNext valueForKey:@"id"];
     [NavAnimation animationFlipFromRigh: self.navigationController.view];
     [self.navigationController pushViewController:fullView animated:NO];
-
+    
 }
 
 
